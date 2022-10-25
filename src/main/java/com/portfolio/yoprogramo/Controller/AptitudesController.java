@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/skill")
+@RequestMapping("/aptitudes")
 @CrossOrigin(origins = "https://portfolioargprograma-9af25.web.app")
 
 public class AptitudesController {
@@ -45,10 +45,10 @@ public class AptitudesController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!aptitudesService.existsById(id)) {
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         }
         aptitudesService.delete(id);
-        return new ResponseEntity(new Mensaje("Skill eliminado"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Wliminado"), HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -57,27 +57,24 @@ public class AptitudesController {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
         if (aptitudesService.existsByNombre(dtoAptitudes.getNombre())) {
-            return new ResponseEntity(new Mensaje("Esa skill ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("Ya existe"), HttpStatus.BAD_REQUEST);
         }
 
         Aptitudes aptitudes = new Aptitudes(dtoAptitudes.getNombre(), dtoAptitudes.getPorcentaje());
         aptitudesService.save(aptitudes);
 
-        return new ResponseEntity(new Mensaje("Skill agregada"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Agregado"), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody DtoAptitudes dtoAptitudes) {
-        //Validamos si existe el ID
         if (!aptitudesService.existsById(id)) {
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
         }
-        //Compara nombre de skills
         if (aptitudesService.existsByNombre(dtoAptitudes.getNombre()) && aptitudesService.getByNombre(dtoAptitudes.getNombre()).get()
                 .getId() != id) {
-            return new ResponseEntity(new Mensaje("Esa skill ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("Ya existe"), HttpStatus.BAD_REQUEST);
         }
-        //No puede estar vacio
         if (StringUtils.isBlank(dtoAptitudes.getNombre())) {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
@@ -87,7 +84,7 @@ public class AptitudesController {
         aptitudes.setPorcentaje(dtoAptitudes.getPorcentaje());
 
         aptitudesService.save(aptitudes);
-        return new ResponseEntity(new Mensaje("Skill actualizada"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Actualizado"), HttpStatus.OK);
 
     }
 }
