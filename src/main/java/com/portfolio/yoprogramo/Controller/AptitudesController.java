@@ -48,7 +48,7 @@ public class AptitudesController {
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         }
         aptitudesService.delete(id);
-        return new ResponseEntity(new Mensaje("Wliminado"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Skill Eliminado"), HttpStatus.OK);
     }
 
     @PostMapping("/create")
