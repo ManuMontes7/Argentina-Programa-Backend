@@ -1,0 +1,20 @@
+SQL:
+
+INSERT INTO `rol`(`id`,`rol_nombre`) VALUES (NULL, 'ROLE_ADMIN');
+INSERT INTO `rol`(`id`,`rol_nombre`) VALUES (NULL, 'ROLE_USER');
+
+INSERT INTO persona (nombre, apellido, descripcion, img) VALUES ('Nombre', 'Apellido', 
+'Descripcion Vacia', 'https://sistemas.com/wp-content/uploads/2013/12/twitpic.png');
+
+
+POSTMAN:
+https://portfolio-yoprogramo.herokuapp.com/auth/nuevo
+
+JSON:
+{
+    "nombre": "admin",
+    "nombreUsuario": "admin",
+    "email": "admin@admin.com",
+    "password": "MMadmin",
+    "roles": ["admin"]
+}
